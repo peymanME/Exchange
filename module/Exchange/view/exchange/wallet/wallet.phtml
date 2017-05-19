@@ -1,0 +1,38 @@
+<?php
+        
+$currenciesViewModel->getForm()->setAttributes ( array (
+    'method' 	=> 'post',
+    'class' 	=> 'form-horizontal',
+        'id'	=> 'exchangeForm'
+) );
+$currenciesViewModel->getForm()->prepare ();
+$type = $currenciesViewModel->getForm()->get('DoExchange')->getValue();
+
+?>
+
+<div class="container">
+    <section id="loginFormSection">
+        <?= $this->form ()->openTag ( $currenciesViewModel->getForm() );?>
+            <?= $this->formElement($currenciesViewModel->getForm()->get('Code')->setValue($currenciesViewModel->getCurrency()->getCurrenciesName()->getCode())); ?> 
+            <div class="form-group">
+                <?php echo $this->partial("exchange/wallet/currency-price.phtml", array(
+                   'currency' => $currenciesViewModel->getCurrency(),
+                   'type' => $type,
+                   'cash' => $currenciesViewModel->getWallet()->getCash()
+                ));?>
+            </div>
+            <div class="form-group">
+                <?= $this->FormButton($currenciesViewModel->getForm()->get('DoExchange')); ?>
+
+            </div>
+        <?= $this->form ()->closeTag ();?>
+        <!-- form -->
+        <div class="form-group">
+            <input type="button" onclick="(function() { require('./home/home').changePage('<?= $this->url('exchange');?>'); })()" value="Cancel" class="btn btn-primary" />
+        </div>
+        <?php if (!is_null($currenciesViewModel->getErrorMessage())){
+        echo $this->partial("error/_information.phtml", array('message' => $currenciesViewModel->getErrorMessage()));}?>
+    </section><!-- content -->
+</div><!-- container -->
+
+

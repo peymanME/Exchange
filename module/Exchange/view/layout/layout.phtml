@@ -1,0 +1,38 @@
+<?= $this->doctype() ?>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script data-main="js/app/main" src="js/require.js"></script>    </head>
+        <?= $this->headTitle('Exchange')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+            ->prependStylesheet($this->basePath('css/exchange-style.css'))
+            ->prependStylesheet($this->basePath('css/font-awesome.min.css'))
+            ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+        ?>
+
+        <!-- Scripts -->
+        <?= $this->headScript()
+            //->prependFile($this->basePath('js/bootstrap.min.js'))
+        //    ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+        ?>
+    <body>
+        <?= $this->partial("layout/menu/main.phtml");?>
+        <div class="container" >
+            <br/><br/><br/><br/>
+            <div class="row" id="mainContent">
+                <?= $this->content ?>
+            </div>
+        </div>
+	<div class="footer">
+            <?php // $this->partial("layout/footer/copyright.phtml");?>
+        </div>
+        <?= $this->inlineScript() ?>
+    </body>
+</html>

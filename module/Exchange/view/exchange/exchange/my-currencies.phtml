@@ -1,0 +1,41 @@
+
+<section id="WalletSection">
+    <table class="table table-hover">
+        <head>
+            My wallet
+        </head>
+        <thead>
+            <th>Currency</th>
+            <th>Unit price</th>
+            <th>Amount</th>
+            <th>Value</th>
+            <th>Actions</th>
+        </thead>
+        <?php 
+        if (count($myCurrenciesViesModel)!==0){
+            foreach ($myCurrenciesViesModel as $myCurrency){
+
+                echo '<tr>'
+                        . '<td>';
+                                echo $myCurrency->getCurrenciesName()->getName();
+                    echo '</td> '
+                        . '<td> ';
+                                echo $myCurrency->getSellPrice();
+                    echo '</td> '
+                        . '<td> ';
+                                echo $myCurrency->getUnit();
+                    echo '</td> '
+                        . '<td> ';
+                                echo $myCurrency->getAveragePrice()* $myCurrency->getUnit();
+                    echo '</td> '
+                        . '<td> <input type="button" value="Sell" onclick="wantToSell(\''. $myCurrency->getCurrenciesName()->getCode() .'\')" class="btn btn-default" /></td>'
+                . '</tr>';           
+            }        
+        }
+?>
+    </table>
+     Available PLN : <?= $cash;?>
+</section>
+
+
+

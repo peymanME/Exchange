@@ -1,0 +1,48 @@
+<section id="ExchangeSection">
+<?php
+$dateexchange = date('d-m-Y');
+
+
+if (is_null($exchangeViewModel->getErrorMessage())){
+?>    <table class="table table-hover">
+        <head>
+            Currencies
+        </head>
+        <thead>
+             <th>Currency</th>
+             <th>Unit</th>
+             <th>Value</th>
+             <th>Actions</th>
+         </thead>
+        <?php 
+        
+        foreach ($exchangeViewModel->getListOf() as $exchange){
+            $dateexchange = $exchange->getFullDateRegisterTostring();
+            echo '<tr>'
+                    . '<td>';
+                        echo $exchange->getCurrenciesName()->getName();
+                echo '</td> '
+                    . '<td>';
+                        echo $exchange->getUnit();
+                echo '</td> '
+                    . '<td> ';
+                        echo $exchange->getPurchasePrice();
+                echo '</td> '
+                    . '<td>'
+                        . ' <input type="button" '
+                        . 'onclick="wantToBuy(\''. $exchange->getCurrenciesName()->getCode() .'\')" '
+                        . 'value="Buy" class="btn btn-default" /></td>'
+            . '</tr>';           
+        }
+?>
+    </table>
+         <div>Last updated date = <?= $dateexchange;?>  </div>
+         
+<?php } else { 
+    //if (!is_null($exchangeViewModel->getErrorMessage())){
+echo $this->partial("error/_information.phtml", array('message' => $exchangeViewModel->getErrorMessage()));}?>
+    
+</section>
+
+
+

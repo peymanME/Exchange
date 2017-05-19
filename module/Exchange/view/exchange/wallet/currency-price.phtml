@@ -1,0 +1,21 @@
+<section id="currencyPriveSection">
+    <div class="list-group">
+        <h4 class="list-group-item-heading">Currency information</h4>
+        
+        <dl>
+            <dd>Name :</dd><dt><?= $currency->getCurrenciesName()->getName();?></dt>
+            <dd>Unit :</dd><dt><?= $currency->getUnit();?></dt>
+            <?php
+            if ($type === "Buy"){
+               echo '<dd>Purchase Price :</dd><dt>'.$currency->getPurchasePrice().'</dt>'; 
+            }
+            else{
+               echo '<dd>Sell Price :</dd><dt>'.$currency->getSellPrice().'</dt>';                 
+            }
+            ?>
+            <dd>Available PLN :</dd><dt><?= $cash;?></dt>
+        </dl>
+
+    </div> 
+   <hr/> 
+</section>

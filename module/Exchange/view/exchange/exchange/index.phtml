@@ -1,0 +1,34 @@
+<?php
+if (is_null($exchangeViewModel->getErrorMessage())){
+?>
+<div class="container">
+    <div class="row">
+        <section id="access">
+            <div class="col-lg-12"> 
+                <div class="col-md-6 table-responsive">
+                    <?php echo $this->partial("exchange/exchange/currencies.phtml", array (
+                        'exchangeViewModel' => $exchangeViewModel));//getCurrenciesViewModel()?>
+                </div>
+                <div class="col-md-6 table-responsive">
+                    <?php echo $this->partial("exchange/exchange/my-currencies.phtml", array (
+                        'myCurrenciesViesModel' => $exchangeViewModel->getListOf(),
+                        'cash'=> $exchangeViewModel->getCash()));?>
+                </div>
+            </div>
+        </section><!-- content -->
+    </div>
+</div>
+<?php } else { 
+    //if (!is_null($exchangeViewModel->getErrorMessage())){
+echo $this->partial("error/_information.phtml", array('message' => $exchangeViewModel->getErrorMessage()));}?>
+<script type="text/javascript">
+    var refresh = setTimeout(function() { (function (){require('./home/home').getExchangeData('<?= $this->url('exchange'); ?>');})(); }, 10000);
+    function wantToBuy(code) {
+        clearTimeout(refresh);
+       (function (){require('./home/home').wantToBuy('<?= $this->url('wallet', array('action'=>'buy')); ?>/'+ code);})(); 
+    }
+    function wantToSell(code) {
+        clearTimeout(refresh);
+       (function (){require('./home/home').wantToBuy('<?= $this->url('wallet', array('action'=>'sell')); ?>/'+ code);})(); 
+    }
+</script>

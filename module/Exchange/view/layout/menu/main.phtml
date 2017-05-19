@@ -1,0 +1,36 @@
+<nav id="Banner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#Navigationbar">
+                <span class="sr-only">Toggle navigation</span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="<?php echo $this->url('root'); ?>">
+                Exchange
+            </a>		
+        </div>
+        <div class="collapse navbar-collapse" id="Navigationbar">
+            <ul	class="nav navbar-nav navbar-right"> 				
+                <li>
+                    <a class="btn btn-lg" onclick="getMyWallet()" href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+                </li>
+                <li>
+                    <a class="btn btn-lg" onclick="(function() { require('./home/home').loginForm('<?= $this->url('home',array('action' => 'login'));?>'); })()" href="#"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a>
+                </li>
+          
+            </ul>
+            <span></span>
+        </div>
+    </div>		
+</nav>
+<script type="text/javascript">
+    function getMyWallet() {
+        if (typeof(refresh) != "undefined"){
+            clearTimeout(refresh);
+        }
+       (function() { require('./home/home').myWallet('<?= $this->url('wallet');?>'); })();
+    }
+</script>
+<!--glyphicon glyphicon-off-->
